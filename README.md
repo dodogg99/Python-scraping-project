@@ -1,9 +1,15 @@
-## Python-project
-#### Python-project為使用http request進行591租屋網資訊的爬取，一開始輸入想要搜尋的城市後，便會取得所有的結果。取得結果後使用Pandas進行資料整理，將車位出租刪除及各個租屋資訊tag、樓層、交通站距離整理成行的形式後，儲存為csv檔案。
+## 591_scraping
+#### 591_scraping為使用http request進行591租屋網出租資訊的爬取。一開始輸入想要搜尋的城市後，便會爬取所有該城市一般刊登出租的資料，但不包含置頂的資料。取得資料後使用Pandas進行整理，將車位出租刪除及各個租屋資訊tag、樓層、交通站距離整理成行的形式後，儲存為城市名稱的csv檔案。
 
 ## 主要使用Module
   - Requests、BeautifulSoup、Pandas
-  
+
+## 步驟說明
+#### 1.安裝requests、bs4及pandas Module
+#### 2.執行591_scrapying.py
+#### 3.輸入要搜尋的城市在以下對照表的region代碼
+![城市代表對照表](https://github.com/dodogg99/Python-project/blob/main/591%E7%A7%9F%E5%B1%8B%E7%B6%B2%E5%9F%8E%E5%B8%82%E4%BB%A3%E7%A2%BC%E5%B0%8D%E7%85%A7%E8%A1%A8.JPG)
+
 ## 程式碼
 ```python
 import requests
@@ -130,5 +136,5 @@ final_data=needed_data.merge(tag_df,how='inner',on='post_id').drop(['floor_str',
 final_data.to_csv(f"{region_code[region]}.csv",index=False,encoding='utf_8_sig')
 ```
 
-## 輸出資料格式
+## 輸出CSV檔案格式範例
 ![資料格式](https://github.com/dodogg99/Python-project/blob/main/591%E7%A7%9F%E5%B1%8B%E8%B3%87%E8%A8%8A%E6%95%B4%E7%90%86%E6%A0%BC%E5%BC%8F.JPG)
