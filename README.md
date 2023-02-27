@@ -1,8 +1,8 @@
 ## 591_scraping
-#### 591_scraping為使用http request進行591租屋網出租資訊的爬取。一開始輸入想要搜尋的城市後，便會爬取所有該城市一般刊登出租的資料，但不包含置頂的資料。取得資料後使用Pandas進行整理，將車位出租刪除及各個租屋tag、鄰近交通站、樓層等資訊整理成行的形式後，儲存為城市名稱的csv檔案。
+#### 591_scraping為使用HTTP request進行591租屋網出租資訊的爬取。一開始輸入想要搜尋的城市後，便會爬取所有該城市一般刊登出租的資料，但不包含置頂的資料。取得資料後使用pandas進行整理，將車位出租刪除及各個租屋tag、鄰近交通站、樓層等資訊整理成行的形式後，儲存為城市名稱的CSV檔案。
 
 ## 主要使用Module
-  - Requests、BeautifulSoup、Pandas
+  - requests、BeautifulSoup、pandas
 
 ## 步驟說明
 #### 1.安裝requests、bs4及pandas Module
