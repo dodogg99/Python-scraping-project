@@ -22,7 +22,7 @@ import time
 
 #網頁資料爬取
 
-region_code={'1': '台北市', '2': '基隆市', '3': '新北市', '4': '新竹市', '5': '新竹縣', '6': '桃園市', '7': '苗栗縣', '8': '台中市',
+region_code = {'1': '台北市', '2': '基隆市', '3': '新北市', '4': '新竹市', '5': '新竹縣', '6': '桃園市', '7': '苗栗縣', '8': '台中市',
              '10': '彰化縣', '11': '南投縣', '12': '嘉義市', '13': '嘉義縣', '14': '雲林縣', '15': '台南市', '17': '高雄市',
              '19': '屏東縣', '21': '宜蘭縣', '22': '台東縣', '23': '花蓮縣', '24': '澎湖縣', '25': '金門縣', '26': '連江縣'}
 
@@ -112,7 +112,7 @@ else:
     print('抓取完成')
     #資料格式整理
 
-    df = pd.DataFrame.from_dict(total_data)
+    df = pd.DataFrame(total_data)
     #刪除重複的租屋
     df = df.drop_duplicates(subset='post_id')
     needed_data = df.iloc[:, [0, 2, 3, 4, 5, 7, 9, 10, 11, 13, 14, 15, 18, 23]]
@@ -120,12 +120,12 @@ else:
     needed_data = needed_data[needed_data.kind_name != '車位']
     total_rent_infor = []
     for i in range(0, len(needed_data)):
-        rent_infor = [needed_data.iloc[i, 1]]
+        rent_infor = [needed_data.iat[i, 1]]
         #將包含文字的tag轉換成只有數字的lsit
         try:
-            needed_data.iat[i, 9] = pd.DataFrame.from_dict(needed_data.iat[i, 9]).iloc[:, 0].tolist()
+            needed_data.iat[i, 9] = pd.DataFrame(needed_data.iat[i, 9]).iloc[:, 0].tolist()
             for j in range(1, 18):
-                if str(j) in needed_data.iat[i, 9]:
+                if j in needed_data.iat[i, 9]:
                     rent_infor.append(1)
                 else:
                     rent_infor.append(0)
@@ -152,7 +152,7 @@ else:
     title = ['post_id', '屋主直租', '近捷運', '拎包入住', '近商圈', '隨時可遷入', '可開伙', '可養寵物', '有車位', '有陽台',
              '有電梯', '押一付一', '免服務費', '南北通透', '免管理費', '可短租', '新上架', '影片房屋', '鄰近交通站', '站名', '距離/m',
              '樓層', '總樓層']
-    pd.DataFrame(total_rent_infor,columns=title)
+    pd.DataFrame(total_rent_infor, columns=title)
     #將整理資料與原始資料合併
     tag_df = pd.DataFrame(total_rent_infor, columns=title)
     final_data = needed_data.merge(tag_df, how='inner', on='post_id').drop(['floor_str', 'rent_tag', 'surrounding'],
